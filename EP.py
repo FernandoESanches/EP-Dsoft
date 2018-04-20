@@ -24,6 +24,16 @@ while acao!=0:
             print('Elemento não encontrado.')
         else:
             del estoque[produto]
+    elif acao==3:
+        produto=input('Nome do produto: ')
+        if produto not in estoque:
+            print('Elemento não encontrado.')
+        else:
+            quantidade=int(input('Quantidade: '))
+            estoque[produto]['quantidade']+=quantidade
+    elif acao==4:
+        for produto in estoque:
+            print('{0} : {1}'.format(produto, estoque[produto]))
     acao=int(input(''' 
 Controle do estoque
 0 - sair
