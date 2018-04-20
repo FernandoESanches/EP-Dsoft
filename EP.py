@@ -1,3 +1,4 @@
+import json
 acao=int(input(''' 
 Controle do estoque
 0 - sair
@@ -6,7 +7,12 @@ Controle do estoque
 3 - alterar item
 4 - imprimir estoque
 Faça sua escolha: '''))
-estoque=dict()
+try:    
+    with  open('estoque.txt', 'r') as arquivo:
+        a=arquivo.read()
+        estoque=json.loads(a)
+except FileNotFoundError:
+    estoque=dict()
 while acao!=0:
     if acao==1:
         produto=input('Nome do produto: ')
@@ -42,3 +48,7 @@ Controle do estoque
 3 - alterar item
 4 - imprimir estoque
 Faça sua escolha: '''))
+dicionario=json.dumps(estoque, sort_keys=True, indent=4)
+with open('estoque.txt', 'w') as arquivo:
+    arquivo.write(dicionario)
+print("Até mais!")
