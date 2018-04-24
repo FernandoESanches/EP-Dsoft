@@ -56,9 +56,17 @@ while acao!=0:
             if estoque[produto]['quantidade'] < 0:
                 lista_de_produtos_negativos.append(produto)
     elif acao==4:
+        soma = 0
         for produto in estoque:
-            print('{0} : {1}'.format(produto, estoque[produto]['quantidade']))
+            print('{0} : {1}'.format(produto, estoque[produto]['quantidade']))  
+        if estoque[produto]['quantidade'] >0:
+            for i in estoque[produto]:
+                soma += estoque[produto]['quantidade'] * estoque[produto]['preço']  
+        print('O valor total do estoque é: {0}'.format(soma))
+        if len(lista_de_produtos_negativos) > 0: 
             print('Os produtos de quantidade negativa são: {0}'.format(lista_de_produtos_negativos))
+        else:
+            print('Não há produtos de quantidade negativa')
     acao=int(input(''' 
 Controle do estoque
 0 - sair
