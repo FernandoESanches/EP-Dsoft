@@ -16,6 +16,7 @@ try:
         estoque=json.loads(a)
 except FileNotFoundError:
     estoque=dict()
+lista_de_produtos_negativos = []
 while acao!=0:
     if acao==1:
         produto=input('Nome do produto: ')
@@ -52,9 +53,12 @@ while acao!=0:
                     print('O preço do produto não pode ser negativo.')
                     preco=float(input('Preço:'))    
                 estoque[produto]['preço']=preco
+            if estoque[produto]['quantidade'] < 0:
+                lista_de_produtos_negativos.append(produto)
     elif acao==4:
         for produto in estoque:
             print('{0} : {1}'.format(produto, estoque[produto]['quantidade']))
+            print('Os produtos de quantidade negativa são: {0}'.format(lista_de_produtos_negativos))
     acao=int(input(''' 
 Controle do estoque
 0 - sair
