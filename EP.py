@@ -1,5 +1,7 @@
 #Considerações: o preço do produto sepre será positivo. 
 import json
+lojas=[]
+loja=input('Nome da loja')
 acao=int(input(''' 
 Controle do estoque
 0 - sair
@@ -18,10 +20,10 @@ while acao!=0:
     if acao==1:
         produto=input('Nome do produto: ')
         if produto not in estoque:
-            quantidade=int(input('Quantidade:'))
+            quantidade=int(input('Quantidade inicial:'))
             while quantidade<0:
                 print('A quantidade inicial não pode ser negativa')
-                quantidade=int(input('Quantidade:'))
+                quantidade=int(input('Quantidade inicial:'))
             estoque[produto]={'quantidade':quantidade}                
             preco=float(input('Preço do produto:'))
             while preco<0:
@@ -65,4 +67,3 @@ dicionario=json.dumps(estoque, sort_keys=True, indent=4)
 with open('estoque.txt', 'w') as arquivo:
     arquivo.write(dicionario)
 print("Até mais!")
-print(estoque)
