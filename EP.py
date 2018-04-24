@@ -1,3 +1,4 @@
+#Considerações: o preço do produto sepre será positivo. 
 import json
 acao=int(input(''' 
 Controle do estoque
@@ -17,11 +18,16 @@ while acao!=0:
     if acao==1:
         produto=input('Nome do produto: ')
         if produto not in estoque:
-            quantidade=int(input('Quantidade inicial: '))
+            quantidade=int(input('Quantidade:'))
             while quantidade<0:
-                print('A quantidade inicial não pode ser negativa.')
-                quantidade=int(input('Quantidade inicial: '))
-            estoque[produto]={'quantidade':quantidade}
+                print('A quantidade inicial não pode ser negativa')
+                quantidade=int(input('Quantidade:'))
+            estoque[produto]={'quantidade':quantidade}                
+            preco=float(input('Preço do produto:'))
+            while preco<0:
+                print('O preço do produto não pode ser negativo')
+                preco=float(input('Preço do produto:'))
+            estoque[produto]={'quantidade':quantidade, 'preço':preco}
         else:
             print('Produto já cadastrado.')
     elif acao==2:
@@ -37,9 +43,16 @@ while acao!=0:
         else:
             quantidade=int(input('Quantidade: '))
             estoque[produto]['quantidade']+=quantidade
+            pergunta=input('Alterar preco? 1 para sim e 0 para não.')
+            if pergunta=='1':
+                preco=float(input('Preço do produto:'))
+                while preco<0:
+                    print('O preço do produto não pode ser negativo.')
+                    preco=float(input('Preço:'))    
+                estoque[produto]['preço']=preco
     elif acao==4:
         for produto in estoque:
-            print('{0} : {1}'.format(produto, estoque[produto]))
+            print('{0} : {1}'.format(produto, estoque[produto]['quantidade']))
     acao=int(input(''' 
 Controle do estoque
 0 - sair
@@ -52,3 +65,4 @@ dicionario=json.dumps(estoque, sort_keys=True, indent=4)
 with open('estoque.txt', 'w') as arquivo:
     arquivo.write(dicionario)
 print("Até mais!")
+print(estoque)
