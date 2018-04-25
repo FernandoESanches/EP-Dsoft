@@ -39,10 +39,10 @@ while acao!=0:
             while quantidade<0:
                 print('A quantidade inicial não pode ser negativa.')
                 quantidade=int(input('Quantidade inicial:'))               
-            preco=float(input('Preço do produto:'))
+            preco=float(input('Preço do produto (em reais):'))
             while preco<0:
                 print('O preço do produto não pode ser negativo')
-                preco=float(input('Preço do produto:'))
+                preco=float(input('Preço do produto (em reais):'))
             estoque[produto]={'quantidade':quantidade, 'preço':preco}
         else:
             print('Produto já cadastrado.')
@@ -61,10 +61,10 @@ while acao!=0:
             estoque[produto]['quantidade']+=quantidade
             pergunta=input('Alterar preco? 1 para sim e 0 para não.')
             if pergunta=='1':
-                preco=float(input('Preço do produto:'))
+                preco=float(input('Preço do produto (em reais):'))
                 while preco<0:
                     print('O preço do produto não pode ser negativo.')
-                    preco=float(input('Preço:'))    
+                    preco=float(input('Preço do produto (em reais):'))    
                 estoque[produto]['preço']=preco
             if estoque[produto]['quantidade'] < 0:
                 lista_de_produtos_negativos.append(produto)
