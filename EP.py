@@ -38,6 +38,8 @@ while acao!=0:
             print('Elemento não encontrado.')
         else:
             del dicionario['lojas'][loja]['estoque'][produto]
+            if produto in dicionario['lojas'][loja]['Lista de produtos em falta']:
+                dicionario['lojas'][loja]['Lista de produtos em falta'].remove(produto)
     elif acao==3:
         produto=input('Nome do produto: ')
         if produto not in dicionario['lojas'][loja]['estoque']:
@@ -52,19 +54,21 @@ while acao!=0:
                     print('O preço do produto não pode ser negativo.')
                     preco=float(input('Preço:'))    
                 dicionario['lojas'][loja]['estoque'][produto]['preço']=preco
-            if dicionario['lojas'][loja]['estoque'][produto]['quantidade'] < 0:
+            if dicionario['lojas'][loja]['estoque'][produto]['quantidade'] <= 0:
                 dicionario['lojas'][loja]['Lista de produtos em falta'].append(produto)
     elif acao==4:
         soma = 0
         for produto in dicionario['lojas'][loja]['estoque']:
-            print('{0} : {1}'.format(produto, dicionario['lojas'][loja]['estoque'][produto]['quantidade']))  
-            if dicionario['lojas'][loja]['estoque'][produto]['quantidade'] >0:
-                soma += dicionario['lojas'][loja]['estoque'][produto]['quantidade'] * dicionario['lojas'][loja]['estoque'][produto]['preço']  
+            if dicionario['lojas'][loja]['estoque'][produto]['quantidade']>0:
+                print('{0} : {1}'.format(produto, dicionario['lojas'][loja]['estoque'][produto]['quantidade']))  
+                soma += dicionario['lojas'][loja]['estoque'][produto]['quantidade'] * dicionario['lojas'][loja]['estoque'][produto]['preço'] 
+            else:
+                print(('{0} : {1}'.format(produto, 'Produto indisponível')))
         print('O valor total do estoque é: {0}'.format(soma))
         if len(dicionario['lojas'][loja]['Lista de produtos em falta']) > 0: 
             print('Os produtos que estão em falta são: {0}'.format(dicionario['lojas'][loja]['Lista de produtos em falta']))
         else:
-            print('Não há produtos de quantidade negativa.')
+            print('Não há produtos em falta.')
     else:
         print('Comando inválido.')
     acao=int(input(''' 
