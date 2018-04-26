@@ -53,7 +53,7 @@ while acao!=0:
                     preco=float(input('Preço:'))    
                 dicionario['lojas'][loja]['estoque'][produto]['preço']=preco
             if dicionario['lojas'][loja]['estoque'][produto]['quantidade'] < 0:
-                dicionario['lojas'][loja]['Lista de produtos negativos'].append(produto)
+                dicionario['lojas'][loja]['Lista de produtos em falta'].append(produto)
     elif acao==4:
         soma = 0
         for produto in dicionario['lojas'][loja]['estoque']:
