@@ -29,7 +29,7 @@ while acao!=0:
             while preco<0:
                 print('O preço do produto não pode ser negativo')
                 preco=float(input('Preço do produto:'))
-            dicionario['lojas'][loja]['estoque'][produto]={'quantidade':quantidade, 'preço':preco}
+            dicionario['lojas'][loja]['estoque'][produto]={'quantidade':'{0} unidades'.format(quantidade), 'preço':'{0} reais'.format(preco)}
         else:
             print('Produto já cadastrado.')
     elif acao==2:
