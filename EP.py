@@ -29,7 +29,7 @@ while acao!=0:
             while preco<0:
                 print('O preço do produto não pode ser negativo')
                 preco=float(input('Preço do produto:'))
-            dicionario['lojas'][loja]['estoque'][produto]={'quantidade':'{0} unidades'.format(quantidade), 'preço':'{0} reais'.format(preco)}
+            dicionario['lojas'][loja]['estoque'][produto]={'quantidade':quantidade, 'preço':preco}
         else:
             print('Produto já cadastrado.')
     elif acao==2:
@@ -60,11 +60,11 @@ while acao!=0:
         soma = 0
         for produto in dicionario['lojas'][loja]['estoque']:
             if dicionario['lojas'][loja]['estoque'][produto]['quantidade']>0:
-                print('{0} : {1}'.format(produto, dicionario['lojas'][loja]['estoque'][produto]['quantidade']))  
+                print('{0} : {1} unidades'.format(produto, dicionario['lojas'][loja]['estoque'][produto]['quantidade']))  
                 soma += dicionario['lojas'][loja]['estoque'][produto]['quantidade'] * dicionario['lojas'][loja]['estoque'][produto]['preço'] 
             else:
                 print(('{0} : {1}'.format(produto, 'Produto indisponível')))
-        print('O valor total do estoque é: {0}'.format(soma))
+        print('O valor total do estoque é: {0} reais'.format(soma))
         if len(dicionario['lojas'][loja]['Lista de produtos em falta']) > 0: 
             print('Os produtos que estão em falta são: {0}'.format(dicionario['lojas'][loja]['Lista de produtos em falta']))
         else:
