@@ -30,6 +30,8 @@ while acao!=0:
                 print('O preço do produto não pode ser negativo')
                 preco=float(input('Preço do produto:'))
             dicionario['lojas'][loja]['estoque'][produto]={'quantidade':quantidade, 'preço':preco}
+            if dicionario['lojas'][loja]['estoque'][produto]['quantidade']==0:
+                dicionario['lojas'][loja]['Lista de produtos em falta'].append(produto)
         else:
             print('Produto já cadastrado.')
     elif acao==2:
@@ -37,6 +39,7 @@ while acao!=0:
         if produto not in dicionario['lojas'][loja]['estoque']:
             print('Elemento não encontrado.')
         else:
+            print('{0} removido com sucesso.'.format(produto))
             del dicionario['lojas'][loja]['estoque'][produto]
             if produto in dicionario['lojas'][loja]['Lista de produtos em falta']:
                 dicionario['lojas'][loja]['Lista de produtos em falta'].remove(produto)
@@ -47,6 +50,11 @@ while acao!=0:
         else:
             quantidade=int(input('Quantidade: '))
             dicionario['lojas'][loja]['estoque'][produto]['quantidade']+=quantidade
+            if dicionario['lojas'][loja]['estoque'][produto]['quantidade'] <= 0 :
+                dicionario['lojas'][loja]['Lista de produtos em falta'].append(produto)
+            else:
+                if produto in dicionario['lojas'][loja]['Lista de produtos em falta']:
+                    dicionario['lojas'][loja]['Lista de produtos em falta'].remove(produto)
             pergunta=input('Alterar preco? 1 para sim e 0 para não.')
             if pergunta=='1':
                 preco=float(input('Preço do produto:'))
@@ -54,13 +62,11 @@ while acao!=0:
                     print('O preço do produto não pode ser negativo.')
                     preco=float(input('Preço:'))    
                 dicionario['lojas'][loja]['estoque'][produto]['preço']=preco
-            if dicionario['lojas'][loja]['estoque'][produto]['quantidade'] <= 0:
-                dicionario['lojas'][loja]['Lista de produtos em falta'].append(produto)
     elif acao==4:
         soma = 0
         for produto in dicionario['lojas'][loja]['estoque']:
             if dicionario['lojas'][loja]['estoque'][produto]['quantidade']>0:
-                print('{0} : {1} unidades'.format(produto, dicionario['lojas'][loja]['estoque'][produto]['quantidade']))  
+                print('{0} : {1}'.format(produto, dicionario['lojas'][loja]['estoque'][produto]['quantidade']))  
                 soma += dicionario['lojas'][loja]['estoque'][produto]['quantidade'] * dicionario['lojas'][loja]['estoque'][produto]['preço'] 
             else:
                 print(('{0} : {1}'.format(produto, 'Produto indisponível')))
